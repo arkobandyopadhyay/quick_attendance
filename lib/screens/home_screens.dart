@@ -1,15 +1,17 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:quick_attendance/screens/sign_in_screens.dart';
 import 'package:quick_attendance/utils/utils.dart';
 
-class Homepage extends StatefulWidget {
-  const Homepage({Key? key}) : super(key: key);
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  _HomepageState createState() => _HomepageState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomepageState extends State<Homepage> {
+class _HomeScreenState extends State<HomeScreen> {
   String location = 'Null, Press Button';
 
   Future<Position> _determinePosition() async {
@@ -50,12 +52,26 @@ class _HomepageState extends State<Homepage> {
     return await Geolocator.getCurrentPosition();
   }
 
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  signOut() async {
+    await auth.signOut();
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => const SignInScreen()));
+  }
+
   @override
   Widget build(BuildContext context) {
     Size screenSize = Utils().getScreenSize();
     return Scaffold(
       appBar: AppBar(
         title: const Text('Classroom'),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          signOut();
+        },
+        backgroundColor: Colors.green,
+        child: const Icon(Icons.logout_rounded),
       ),
       body: Column(
         children: [

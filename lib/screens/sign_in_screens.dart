@@ -16,12 +16,14 @@ class SignInScreen extends StatefulWidget {
 class _SignInScreenState extends State<SignInScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController userController = TextEditingController();
   AuthenticationMethods authenticationMethods = AuthenticationMethods();
   bool isLoading = false;
 
   @override
   void dispose() {
     super.dispose();
+    userController.dispose();
     emailController.dispose();
     passwordController.dispose();
   }
@@ -45,7 +47,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     height: 15,
                   ),
                   Container(
-                    height: screenSize.height * 0.5,
+                    height: screenSize.height * 0.6,
                     width: screenSize.width * 0.7,
                     padding: const EdgeInsets.all(25),
                     decoration: BoxDecoration(
@@ -62,6 +64,12 @@ class _SignInScreenState extends State<SignInScreen> {
                           "Sign-In",
                           style: TextStyle(
                               fontWeight: FontWeight.w500, fontSize: 28),
+                        ),
+                        TextFieldWidget(
+                          title: "User",
+                          controller: userController,
+                          obsecureText: false,
+                          hintText: "Enter your Profile",
                         ),
                         TextFieldWidget(
                           title: "Email",
@@ -84,7 +92,7 @@ class _SignInScreenState extends State<SignInScreen> {
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(builder: ((context) {
-                                  return const Homepage();
+                                  return const HomeScreen();
                                 })),
                               );
                             },
