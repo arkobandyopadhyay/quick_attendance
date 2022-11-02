@@ -1,4 +1,5 @@
 import 'package:quick_attendance/resources/authentication_methods.dart';
+import 'package:quick_attendance/screens/home_screens.dart';
 import 'package:quick_attendance/screens/sign_in_screens.dart';
 import 'package:quick_attendance/utils/utils.dart';
 import 'package:quick_attendance/widgets/text_field_widget.dart';
@@ -54,8 +55,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: screenSize.height * 0.7,
                     child: FittedBox(
                       child: Container(
-                        height: screenSize.height * 0.85,
-                        width: screenSize.width * 0.8,
+                        height: screenSize.height * 0.95,
+                        width: screenSize.width * 0.95,
                         padding: const EdgeInsets.all(15),
                         decoration: BoxDecoration(
                             border: Border.all(
@@ -132,12 +133,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     Utils().showSnackBar(
                                         context: context, content: output);
                                   } else {
-                                    // ignore: use_build_context_synchronously
-                                    Navigator.push(
+                                    Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
                                             builder: (_) =>
-                                                const SignInScreen()));
+                                                const HomeScreen()));
                                   }
                                 },
                                 child: const Text(

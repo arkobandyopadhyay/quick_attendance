@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
               ),
             );
           } else if (user.hasData) {
-            return const Homepage();
+            return const HomeScreen();
           } else {
             return const SignInScreen();
           }
